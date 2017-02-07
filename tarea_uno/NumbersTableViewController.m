@@ -7,8 +7,10 @@
 //
 
 #import "NumbersTableViewController.h"
+#import "NumbersTableViewCell.h"
 
 @interface NumbersTableViewController ()
+
 
 @end
 
@@ -18,13 +20,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    NSMutableArray *myIntegers = [NSMutableArray array];
+    self.numbers = [NSMutableArray array];
     
     for (NSInteger i = 0; i <= 100; i++)
-        [myIntegers addObject:[NSNumber numberWithInteger:i * 8]];
-    
-    NSLog (@"%@", [myIntegers objectAtIndex:0]);
-    
+        [self.numbers addObject:[NSNumber numberWithInteger:i * 8]];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -34,22 +33,24 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    NSLog(@"# of sections");
     return 1;    //count of section
 }
 
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    NSLog(@"Number of rows for section %li", (long)section);
-    return 100;
+    return [self.numbers count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *CellIdentifier = @"NumbersTableViewCell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     
-    cell.textLabel.text = [NSString stringWithFormat:@"8 * %li = %li", indexPath.row, indexPath.row * 8];
+    NumbersTableViewCell*cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
+    
+
+    cell.multiplicationDescription.text = [NSString stringWithFormat:@" 8 * %li = ", (long)indexPath.row];
+
+    cell.multiplicationResult.text = [NSString stringWithFormat:@"%@", [self.numbers objectAtIndex:indexPath.row]];
     
     return cell;
 }

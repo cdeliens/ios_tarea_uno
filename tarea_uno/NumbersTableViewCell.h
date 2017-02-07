@@ -9,5 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface NumbersTableViewCell : UITableViewCell
+@property (weak, nonatomic) IBOutlet UILabel *multiplicationDescription;
+@property (weak, nonatomic) IBOutlet UILabel *multiplicationResult;
 
 @end

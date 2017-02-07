@@ -10,4 +10,6 @@
 
 @interface NumbersTableViewController : UITableViewController
 
+@property (strong, nonatomic) NSMutableArray *numbers;
+
 @end
